@@ -1,0 +1,21 @@
+Nome,Espécie,Raça,Idade,Peso,Tutor,Contato,Plano
+Rex,Cachorro,Labrador,5,30.0,João,11999999999,Premium
+Mimi,Gato,Persa,3,4.5,Ana,11988887777,VIP
+Thor,Cachorro,Pitbull,4,28.0,Carlos,11977776666,Standard
+Luna,Cachorro,Beagle,2,12.3,Beatriz,11966665555,Premium
+Nina,Gato,Siamês,1,3.2,Paulo,11944443333,VIP
+Toby,Cachorro,Poodle,6,10.0,Roberta,11911112222,Standard
+Mel,Gato,Angorá,2,4.1,Lucas,11922223333,Premium
+Fred,Cachorro,Golden,7,35.0,Daniela,11933334444,VIP
+Tom,Gato,Maine Coon,4,6.5,Bruno,11955556666,Standard
+Max,Cachorro,Bulldog,5,25.0,Juliana,11977778888,Premium
+Lily,Gato,Sphynx,3,3.9,Marcos,11988889999,VIP
+Bob,Cachorro,Boxer,6,29.0,Patrícia,11910101010,Standard
+Chloe,Gato,Abissínio,2,4.2,Fernanda,11920202020,Premium
+Rocky,Cachorro,Dálmata,4,26.5,Eduardo,11930303030,VIP
+Zoe,Gato,Bengal,5,5.1,Luciana,11940404040,Standard
+Spike,Cachorro,Pastor Alemão,3,32.0,Henrique,11950505050,Premium
+Jade,Gato,British Shorthair,1,3.5,Camila,11960606060,VIP
+Bidu,Cachorro,Schnauzer,7,18.0,Marcelo,11970707070,Standard
+Nala,Gato,Ragdoll,4,4.8,Tatiane,11980808080,Premium
+Simba,Cachorro,Shih Tzu,5,8.0,Rodrigo,11990909090,VIP
