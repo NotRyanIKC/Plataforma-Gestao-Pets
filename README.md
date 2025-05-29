@@ -8,7 +8,7 @@ Este projeto é uma solução parcial para o desafio de digitalização de proce
 * 🧪 **Testes unitários** utilizando biblioteca JUnit
 * 🐶 Suporte a diferentes **planos de hospedagem**: Standard, Premium e VIP
 * 🎈 Suporte a diferentes tipos de Serviços para o pet
-* 📓 Relatório Mensal da tarifa final
+* 📓 Relatório Mensal
 * 👤 Cadastro de tutor vinculado ao pet
 * ♻️ Estrutura orientada a objetos com uso de herança, polimorfismo e interfaces
 
