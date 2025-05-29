@@ -2,11 +2,11 @@ package com.hotelpet;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.*;
+
 
 public class Hotel {
     private List<Pet> pets = new ArrayList<>();
@@ -31,7 +31,8 @@ public class Hotel {
             System.out.println("3. Exportar pets para CSV");
             System.out.println("4. Importa pets CSV");
             System.out.println("5. Agendar serviço");
-            System.out.println("6. Sair");
+            System.out.println("6. Dar saida no Pet");
+            System.out.println("7. Sair");
             System.out.print("Escolha: ");
             int opcao = scanf.nextInt();
             scanf.nextLine();
@@ -53,6 +54,9 @@ public class Hotel {
                     agendarServico();
                     break;
                 case 6:
+                    darSaida();
+                    break;
+                case 7:
                     System.out.println("Encerrando...");
                     executando = false;
                     break;
@@ -218,6 +222,52 @@ public void exportarPetsParaCSV() {
     }
     return null; 
 }
+
+public void darSaida() {
+
+    System.out.print("Nome do pet para dar saída: ");
+    String nome = scanf.nextLine();
+    Pet pet = buscarPetPorNome(nome);
+
+    if (pet == null) {
+        System.out.println("Pet não encontrado.");
+        return;
+    }
+
+    LocalDateTime saida = LocalDateTime.now();
+    LocalDateTime entrada = pet.getHoraEntrada();
+
+    Duration duracao = Duration.between(entrada, saida);
+    double horas = duracao.toMinutes() / 60.0;
+
+    double tarifaHora = pet.getPlano().calcularTarifaPorHora();
+    double valorHospedagem = tarifaHora * horas;
+
+    double valorServicos = 0.0;
+    System.out.println("\n--- FATURA DETALHADA ---");
+    System.out.println("Pet: " + pet.getNome());
+    System.out.println("Plano: " + pet.getPlano().getNomePlano() + " (R$" + tarifaHora + "/hora)");
+    System.out.println("Entrada: " + entrada);
+    System.out.println("Saída: " + saida);
+    System.out.printf("Tempo hospedado: %.2f horas%n", horas);
+    System.out.printf("Valor da hospedagem: R$ %.2f%n", valorHospedagem);
+
+    System.out.println("\nServiços utilizados:");
+    for (Agendamento ag : agenda.getAgendamentos()) {
+        if (ag.getPet().equals(pet)) {
+            double preco = ag.getServico().getPrecoBase(); 
+            valorServicos += preco;
+            System.out.println("- " + ag.getServico().getNome() + " em " + ag.getData() + " às " + ag.getInicio() + " (R$" + preco + ")");
+        }
+    }
+
+    System.out.printf("\nTotal de serviços: R$ %.2f%n", valorServicos);
+    System.out.printf("TOTAL GERAL: R$ %.2f%n", (valorHospedagem + valorServicos));
+
+
+    pets.remove(pet);
+}
+
 
    public void agendarServico() {
 
