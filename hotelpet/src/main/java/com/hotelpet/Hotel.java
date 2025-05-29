@@ -226,10 +226,11 @@ public void exportarPetsParaCSV() {
         String horaEntradaStr = (pet.getHoraEntrada() != null)
             ? pet.getHoraEntrada().format(formatter)
             : "N/A";
-        System.out.printf("- %s (%s), Plano: %s, Entrada: %s\n",
+        System.out.printf("- %s (%s), Plano: %s, Tutor: %s, Entrada: %s\n",
                 pet.getNome(),
                 pet.getEspecie(),
                 pet.getPlano().getNomePlano(),
+                pet.getTutor().getNome(),
                 horaEntradaStr);
     }
 }
