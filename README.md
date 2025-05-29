@@ -40,4 +40,12 @@ Buddy,cachorro,Labrador,3,28.5,João Silva,11999999999,2025-05-28T10:00,VIP
 ```
 
 
+## 👨‍💻 Desenvolvido Por:
+
+* Ryan Cavalcanti
+* Pedro Augusto
+* Icaro Santos
+* Luan Ramiro
+
+
 
