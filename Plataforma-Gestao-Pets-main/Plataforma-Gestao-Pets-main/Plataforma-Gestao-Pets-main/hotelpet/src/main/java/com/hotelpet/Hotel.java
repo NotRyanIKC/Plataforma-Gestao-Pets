@@ -11,8 +11,12 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 
 public class Hotel {
@@ -39,7 +43,8 @@ public class Hotel {
             System.out.println("4. Importa pets CSV");
             System.out.println("5. Agendar serviço");
             System.out.println("6. Dar saida no Pet");
-            System.out.println("7. Sair");
+            System.out.println("7. Relatorio Mensal");
+            System.out.println("8. Sair");
             System.out.print("Escolha: ");
             int opcao = scanf.nextInt();
             scanf.nextLine();
@@ -64,6 +69,9 @@ public class Hotel {
                     darSaida();
                     break;
                 case 7:
+                    relatorioMensal();
+                    break;
+                case 8:
                     System.out.println("Encerrando...");
                     executando = false;
                     break;
@@ -321,6 +329,68 @@ public void darSaida() {
     Agendamento novo = new Agendamento(pet, servico, data, inicio);
     agenda.agendar(novo);
     executarMenu();
+}
+    public void relatorioMensal() {
+    System.out.println("\n=== RELATÓRIO MENSAL ===");
+
+    // Filtrar mês atual
+    LocalDate hoje = LocalDate.now();
+    int mesAtual = hoje.getMonthValue();
+    int anoAtual = hoje.getYear();
+
+    // 1. Pets atendidos (sem repeti-los)
+    Set<Pet> petsAtendidos = new HashSet<>();
+
+    // 2. Contador de serviços
+    Map<String, Integer> servicosMaisUsados = new HashMap<>();
+
+    // 3. Receita por serviço
+    Map<String, Double> receitaPorServico = new HashMap<>();
+
+    for (Agendamento ag : agenda.getAgendamentos()) {
+        LocalDate data = ag.getData();
+        if (data.getMonthValue() == mesAtual && data.getYear() == anoAtual) {
+            petsAtendidos.add(ag.getPet());
+
+            String nomeServico = ag.getServico().getNome();
+            double preco = ag.getServico().getPrecoBase();
+
+            // Contar serviços
+            servicosMaisUsados.put(nomeServico,
+                servicosMaisUsados.getOrDefault(nomeServico, 0) + 1);
+
+            // Soma da receita
+            receitaPorServico.put(nomeServico,
+                receitaPorServico.getOrDefault(nomeServico, 0.0) + preco);
+        }
+    }
+
+    System.out.println("\nPets Atendidos:");
+    if (petsAtendidos.isEmpty()) {
+        System.out.println("- Nenhum pet atendido este mês.");
+    } else {
+        for (Pet pet : petsAtendidos) {
+            System.out.println("- " + pet.getNome() + " (" + pet.getEspecie() + ")");
+        }
+    }
+
+    System.out.println("\nServiços mais utilizados:");
+    if (servicosMaisUsados.isEmpty()) {
+        System.out.println("- Nenhum serviço registrado este mês.");
+    } else {
+        servicosMaisUsados.entrySet().stream()
+            .sorted((e1, e2) -> e2.getValue() - e1.getValue())
+            .forEach(entry -> System.out.println("- " + entry.getKey() + ": " + entry.getValue() + "x"));
+    }
+
+    System.out.println("\nReceita total por serviço:");
+    if (receitaPorServico.isEmpty()) {
+        System.out.println("- Nenhuma receita registrada.");
+    } else {
+        for (Map.Entry<String, Double> entry : receitaPorServico.entrySet()) {
+            System.out.printf("- %s: R$ %.2f\n", entry.getKey(), entry.getValue());
+        }
+    }
 }
 
     public List<Pet> getPets() {
